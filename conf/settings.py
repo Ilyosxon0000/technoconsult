@@ -24,8 +24,9 @@ SECRET_KEY = 'django-insecure-a=136vf_s-wi2ktqm^6$nm$(&*f+gko$8wjrzn6bl#!#9uwwzq
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+DEPLOY = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['technoconsult.pythonanywhere.com']
 
 
 # Application definition
@@ -132,10 +133,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL='/media/'
 # STATIC_ROOT='./static'
-STATICFILES_DIRS=[
-    BASE_DIR / 'static'
-]
-MEDIA_ROOT=BASE_DIR / 'media'
+if DEPLOY:
+    STATIC_ROOT = '/home/technoconsult/conf/static'
+    STATIC_URL = '/static/'
+else:
+    STATICFILES_DIRS=[
+        BASE_DIR / 'static'
+    ]
+    MEDIA_ROOT=BASE_DIR / 'media'
+    
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
